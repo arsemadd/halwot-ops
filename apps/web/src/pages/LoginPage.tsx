@@ -49,14 +49,13 @@ export const LoginPage = () => {
 
   return (
     <div className="brand-glow-bg relative flex min-h-screen items-center justify-center px-4 py-10">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.45)_100%)]" />
       <div className="relative grid w-full max-w-5xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
         <div className="hidden lg:block">
           <div className="mb-8 flex items-center gap-4">
             <img
               src="/halwot-logo.png"
               alt="Halwot Emmanuel United Church"
-              className="h-20 w-20 rounded-full shadow-[0_0_40px_rgba(244,121,32,0.45)]"
+              className="h-20 w-20 rounded-full shadow-[0_12px_32px_rgba(244,121,32,0.22)]"
             />
             <div>
               <p className="text-sm font-medium tracking-wide text-ink-muted">
