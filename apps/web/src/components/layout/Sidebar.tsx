@@ -35,6 +35,7 @@ type NavGroup = {
 
 const navGroups: NavGroup[] = [
   {
+    title: 'Overview',
     items: [{ label: 'Dashboard', to: '/', icon: IconDashboard }],
   },
   {
@@ -79,33 +80,33 @@ const navGroups: NavGroup[] = [
 ]
 
 export const Sidebar = () => (
-  <aside className="flex w-64 shrink-0 flex-col border-r border-border bg-white">
-    <div className="border-b border-border px-4 py-5">
+  <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-[#fbfafa]">
+    <div className="px-4 py-5">
       <div className="flex items-center gap-3">
         <img
           src="/halwot-logo.png"
           alt="Halwot Emmanuel United Church"
-          className="h-11 w-11 rounded-full ring-2 ring-accent/30"
+          className="h-9 w-9 rounded-lg object-cover"
         />
         <div className="min-w-0">
-          <div className="truncate text-base font-bold tracking-tight text-ink">
-            Halwot <span className="text-accent">Ops</span>
+          <div className="truncate text-sm font-semibold tracking-tight text-ink">
+            Halwot Ops
           </div>
-          <div className="truncate text-[11px] font-medium uppercase tracking-[0.14em] text-ink-subtle">
+          <div className="truncate text-[10px] font-medium uppercase tracking-[0.14em] text-ink-subtle">
             HEC OS
           </div>
         </div>
       </div>
     </div>
-    <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Main navigation">
+    <nav className="flex-1 overflow-y-auto px-2.5 pb-4" aria-label="Main navigation">
       {navGroups.map((group, groupIndex) => (
         <div key={group.title || `group-${groupIndex}`} className={groupIndex > 0 ? 'mt-5' : ''}>
           {group.title && (
-            <div className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+            <div className="mb-1.5 px-2.5 text-[10px] font-medium uppercase tracking-[0.14em] text-ink-subtle/80">
               {group.title}
             </div>
           )}
-          <ul className="space-y-1">
+          <ul className="space-y-0.5">
             {group.items.map((item) => {
               const Icon = item.icon
               return (
@@ -115,14 +116,14 @@ export const Sidebar = () => (
                     end={item.to === '/'}
                     className={({ isActive }) =>
                       clsx(
-                        'flex items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-all',
+                        'flex items-center gap-2.5 rounded-full px-2.5 py-2 text-[13px] font-medium transition-colors',
                         isActive
-                          ? 'bg-accent text-white shadow-[0_8px_20px_rgba(244,121,32,0.28)]'
-                          : 'text-ink-muted hover:bg-accent-light hover:text-ink',
+                          ? 'bg-accent text-white'
+                          : 'text-ink-muted hover:bg-white hover:text-ink',
                       )
                     }
                   >
-                    <Icon className="shrink-0 opacity-90" />
+                    <Icon className="shrink-0 opacity-80" />
                     <span>{item.label}</span>
                   </NavLink>
                 </li>
@@ -132,10 +133,5 @@ export const Sidebar = () => (
         </div>
       ))}
     </nav>
-    <div className="border-t border-border px-4 py-4">
-      <p className="text-[11px] leading-relaxed text-ink-subtle">
-        Halwot Emmanuel United Church
-      </p>
-    </div>
   </aside>
 )

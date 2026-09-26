@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ActivityLog;
 use App\Models\AppNotification;
 use App\Models\Asset;
 use App\Models\AssetCheckout;
@@ -168,19 +169,23 @@ class DatabaseSeeder extends Seeder
                 'phone' => '+251-911-111-111',
                 'email' => 'daniel@example.com',
                 'membership_status' => 'member',
-                'membership_date' => now()->subYears(2)->toDateString(),
-                'first_contact_date' => now()->subYears(3)->toDateString(),
+                'membership_date' => now()->subMonths(2)->toDateString(),
+                'first_contact_date' => now()->subMonths(3)->toDateString(),
+                'created_at' => now()->subMonths(2),
+                'updated_at' => now()->subMonths(2),
             ]),
             Person::create([
                 'organization_id' => $organization->id,
                 'household_id' => $household->id,
-                'full_name' => 'Sara Bekele',
+                'full_name' => 'Sara Tesfaye',
                 'preferred_name' => 'Sara',
                 'gender' => 'female',
                 'phone' => '+251-911-222-222',
                 'email' => 'sara@example.com',
-                'membership_status' => 'member',
-                'membership_date' => now()->subYears(2)->toDateString(),
+                'membership_status' => 'new',
+                'first_contact_date' => now()->toDateString(),
+                'created_at' => now()->subHours(3),
+                'updated_at' => now()->subHours(3),
             ]),
             Person::create([
                 'organization_id' => $organization->id,
@@ -189,8 +194,10 @@ class DatabaseSeeder extends Seeder
                 'gender' => 'female',
                 'phone' => '+251-911-333-333',
                 'email' => 'meron@example.com',
-                'membership_status' => 'new',
-                'first_contact_date' => now()->subDays(10)->toDateString(),
+                'membership_status' => 'connected',
+                'first_contact_date' => now()->subMonths(1)->toDateString(),
+                'created_at' => now()->subMonth(),
+                'updated_at' => now()->subMonth(),
             ]),
         ];
 
@@ -199,14 +206,24 @@ class DatabaseSeeder extends Seeder
             $people[1]->id => ['role' => 'spouse'],
         ]);
 
-        FollowUp::create([
+        $overdueFollowUp = FollowUp::create([
             'organization_id' => $organization->id,
-            'person_id' => $people[2]->id,
+            'person_id' => $people[0]->id,
             'owner_user_id' => $admin->id,
             'status' => 'open',
-            'last_contact_at' => now()->subDays(3),
-            'next_action_at' => now()->subDay(),
-            'notes' => 'Schedule a welcome visit and connect with a small group.',
+            'last_contact_at' => now()->subDays(5),
+            'next_action_at' => now()->subDays(3),
+            'notes' => 'New member check-in',
+        ]);
+
+        FollowUp::create([
+            'organization_id' => $organization->id,
+            'person_id' => $people[1]->id,
+            'owner_user_id' => $admin->id,
+            'status' => 'in_progress',
+            'last_contact_at' => now()->subDay(),
+            'next_action_at' => now()->endOfDay(),
+            'notes' => 'Welcome call — first visit',
         ]);
 
         MinistryMembership::create([
@@ -352,7 +369,7 @@ class DatabaseSeeder extends Seeder
             'requested_by_user_id' => $admin->id,
         ]);
 
-        Expense::create([
+        $submittedExpense = Expense::create([
             'organization_id' => $organization->id,
             'category' => 'worship',
             'program_id' => $program->id,
@@ -421,6 +438,56 @@ class DatabaseSeeder extends Seeder
             'body' => 'Worship refreshments expense (ETB 5,000) was submitted.',
             'link' => '/operations/expenses',
             'read_at' => null,
+        ]);
+
+        ActivityLog::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'action' => 'person.created',
+            'subject_type' => Person::class,
+            'subject_id' => $people[1]->id,
+            'description' => $people[1]->full_name.' registered as a new member',
+            'created_at' => now()->setTime(9, 14),
+        ]);
+
+        ActivityLog::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'action' => 'follow_up.created',
+            'subject_type' => FollowUp::class,
+            'subject_id' => $overdueFollowUp->id,
+            'description' => $people[2]->full_name.' added to follow-up queue',
+            'created_at' => now()->subHours(2),
+        ]);
+
+        ActivityLog::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'action' => 'program.updated',
+            'subject_type' => Program::class,
+            'subject_id' => $program->id,
+            'description' => 'Sunday Worship Service team confirmed',
+            'created_at' => now()->subHours(5),
+        ]);
+
+        ActivityLog::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'action' => 'asset.checkout_requested',
+            'subject_type' => Asset::class,
+            'subject_id' => $mic->id,
+            'description' => 'MIC-001 asset checkout requested',
+            'created_at' => now()->subDay()->setTime(16, 20),
+        ]);
+
+        ActivityLog::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'action' => 'expense.submitted',
+            'subject_type' => Expense::class,
+            'subject_id' => $submittedExpense->id,
+            'description' => 'Expense request submitted',
+            'created_at' => now()->subDay()->setTime(11, 5),
         ]);
     }
 }

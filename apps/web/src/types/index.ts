@@ -158,6 +158,63 @@ export type UpcomingProgram = {
   starts_at?: string | null
   location?: string | null
   status: ProgramStatus
+  serving_count?: number
+}
+
+export type DashboardAttention = {
+  type: string
+  count: number
+  title: string
+  message: string
+  link: string
+  follow_up_id?: number
+}
+
+export type DashboardFollowUpItem = {
+  id: number
+  person_id: number
+  person_name?: string | null
+  preferred_name?: string | null
+  reason: string
+  status: FollowUpStatus
+  next_action_at?: string | null
+  is_overdue: boolean
+  due_today: boolean
+  days_overdue?: number | null
+}
+
+export type MemberGrowthPoint = {
+  month: string
+  label: string
+  count: number
+}
+
+export type DashboardActivityItem = {
+  id: number
+  action: string
+  description?: string | null
+  created_at: string
+  user_name?: string | null
+  tone?: 'success' | 'accent' | 'neutral'
+}
+
+export type DashboardData = {
+  members: number
+  total_people?: number
+  new_this_month: number
+  active_volunteers: number
+  programs_this_month: number
+  next_program_title?: string | null
+  open_follow_ups: number
+  overdue_follow_ups: number
+  attention?: DashboardAttention | null
+  priority_follow_ups?: DashboardFollowUpItem[]
+  member_growth?: MemberGrowthPoint[]
+  upcoming_programs: UpcomingProgram[]
+  recent_activity?: DashboardActivityItem[]
+  pending_expenses?: number
+  assets_checked_out?: number
+  open_asset_requests?: number
 }
 
 export type AssetStatus =
@@ -299,19 +356,6 @@ export type ProgramDocument = {
   uploaded_by?: User | null
   created_at?: string
   updated_at?: string
-}
-
-export type DashboardData = {
-  members: number
-  new_this_month: number
-  active_volunteers: number
-  programs_this_month: number
-  open_follow_ups: number
-  overdue_follow_ups: number
-  upcoming_programs: UpcomingProgram[]
-  pending_expenses?: number
-  assets_checked_out?: number
-  open_asset_requests?: number
 }
 
 export type ActivityLog = {

@@ -2,19 +2,19 @@
 @import 'tailwindcss';
 
 :root {
-  --color-canvas: #ffffff;
-  --color-canvas-elevated: #f7f8fa;
-  --color-ink: #14161a;
-  --color-ink-muted: #5c6370;
-  --color-ink-subtle: #8b919c;
-  --color-accent: #f47920;
-  --color-accent-hover: #e06a14;
-  --color-accent-light: rgba(244, 121, 32, 0.12);
-  --color-accent-glow: rgba(244, 121, 32, 0.22);
-  --color-border: #e6e8ee;
-  --color-border-strong: #d5d9e2;
+  --color-canvas: #f7f6f4;
+  --color-canvas-elevated: #f1f0ee;
+  --color-ink: #1c1917;
+  --color-ink-muted: #6b6560;
+  --color-ink-subtle: #9a938c;
+  --color-accent: #d97736;
+  --color-accent-hover: #c46528;
+  --color-accent-light: rgba(217, 119, 54, 0.12);
+  --color-accent-glow: rgba(217, 119, 54, 0.2);
+  --color-border: #ebe8e4;
+  --color-border-strong: #ddd7d0;
   --color-surface: #ffffff;
-  --color-surface-hover: #f3f4f7;
+  --color-surface-hover: #f7f5f2;
   --color-danger: #d92d20;
   --color-danger-light: #fef3f2;
   --color-warning: #b54708;
