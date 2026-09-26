@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\AppNotification;
 use App\Models\Asset;
 use App\Models\AssetCheckout;
 use App\Models\AssetLocation;
@@ -395,6 +396,31 @@ class DatabaseSeeder extends Seeder
             'description' => 'Run sheet for Sunday worship service',
             'file_path' => 'documents/sunday-worship-order.pdf',
             'uploaded_by_user_id' => $admin->id,
+        ]);
+
+        AppNotification::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'title' => 'Follow-up overdue',
+            'body' => 'Hanna Guest has an overdue follow-up action.',
+            'link' => '/people/follow-ups',
+        ]);
+
+        AppNotification::create([
+            'organization_id' => $organization->id,
+            'user_id' => null,
+            'title' => 'Asset checkout requested',
+            'body' => 'MIC-001 Wireless Mic was requested for Sunday Worship Service.',
+            'link' => '/operations/checkouts',
+        ]);
+
+        AppNotification::create([
+            'organization_id' => $organization->id,
+            'user_id' => $admin->id,
+            'title' => 'Expense awaiting approval',
+            'body' => 'Worship refreshments expense (ETB 5,000) was submitted.',
+            'link' => '/operations/expenses',
+            'read_at' => null,
         ]);
     }
 }

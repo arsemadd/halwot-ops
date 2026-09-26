@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\V1\ExpenseController;
 use App\Http\Controllers\Api\V1\FollowUpController;
 use App\Http\Controllers\Api\V1\HouseholdController;
 use App\Http\Controllers\Api\V1\MinistryController;
+use App\Http\Controllers\Api\V1\NotificationController;
 use App\Http\Controllers\Api\V1\OrganizationController;
 use App\Http\Controllers\Api\V1\PersonController;
 use App\Http\Controllers\Api\V1\ProgramBudgetController;
@@ -67,6 +68,10 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::patch('/expenses/{expense}/reject', [ExpenseController::class, 'reject']);
     Route::patch('/expenses/{expense}/mark-paid', [ExpenseController::class, 'markPaid']);
     Route::patch('/expenses/{expense}/reconcile', [ExpenseController::class, 'reconcile']);
+
+    Route::get('/notifications', [NotificationController::class, 'index']);
+    Route::patch('/notifications/mark-all-read', [NotificationController::class, 'markAllRead']);
+    Route::patch('/notifications/{notification}/read', [NotificationController::class, 'markRead']);
 
     Route::get('/activity-logs', [ActivityLogController::class, 'index']);
 

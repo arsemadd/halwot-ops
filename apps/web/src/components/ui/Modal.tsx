@@ -29,7 +29,7 @@ export const Modal = ({ isOpen, onClose, title, children, footer, size = 'md' }:
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+      className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="modal-title"
@@ -41,7 +41,7 @@ export const Modal = ({ isOpen, onClose, title, children, footer, size = 'md' }:
       />
       <div
         className={clsx(
-          'panel relative z-10 w-full shadow-[0_20px_50px_rgba(20,22,26,0.18)]',
+          'panel relative z-10 flex max-h-[92vh] w-full flex-col overflow-hidden rounded-t-2xl shadow-[0_20px_50px_rgba(20,22,26,0.18)] sm:rounded-2xl',
           {
             'max-w-sm': size === 'sm',
             'max-w-lg': size === 'md',
@@ -49,7 +49,7 @@ export const Modal = ({ isOpen, onClose, title, children, footer, size = 'md' }:
           },
         )}
       >
-        <div className="flex items-center justify-between border-b border-border px-6 py-4">
+        <div className="flex shrink-0 items-center justify-between border-b border-border px-5 py-4 sm:px-6">
           <h2 id="modal-title" className="text-lg font-semibold text-ink">
             {title}
           </h2>
@@ -57,9 +57,11 @@ export const Modal = ({ isOpen, onClose, title, children, footer, size = 'md' }:
             ✕
           </Button>
         </div>
-        <div className="px-6 py-4">{children}</div>
+        <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-5 py-4 sm:px-6">
+          {children}
+        </div>
         {footer && (
-          <div className="flex justify-end gap-2 border-t border-border px-6 py-4">
+          <div className="flex shrink-0 flex-wrap justify-end gap-2 border-t border-border bg-white px-5 py-4 sm:px-6">
             {footer}
           </div>
         )}

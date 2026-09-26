@@ -326,6 +326,18 @@ export type ActivityLog = {
   created_at: string
 }
 
+export type AppNotification = {
+  id: number
+  organization_id?: number
+  user_id?: number | null
+  title: string
+  body?: string | null
+  link?: string | null
+  read_at?: string | null
+  created_at: string
+  updated_at?: string
+}
+
 export type Organization = {
   id: number
   name: string

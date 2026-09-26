@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\AppNotification;
 use App\Models\AssetCheckout;
 use App\Models\ProgramBudget;
 use App\Models\ProgramDocument;
@@ -28,5 +29,6 @@ class AppServiceProvider extends ServiceProvider
         Route::bind('budget', fn (string $value) => ProgramBudget::findOrFail($value));
         Route::bind('task', fn (string $value) => ProgramTask::findOrFail($value));
         Route::bind('document', fn (string $value) => ProgramDocument::findOrFail($value));
+        Route::bind('notification', fn (string $value) => AppNotification::findOrFail($value));
     }
 }

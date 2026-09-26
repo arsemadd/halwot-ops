@@ -43,12 +43,16 @@ const nowItems: RoadmapItem[] = [
     title: 'Program operations',
     description: 'Budgets, tasks, and documents inside each program workspace.',
   },
+  {
+    title: 'In-app notifications',
+    description: 'Operational alerts for follow-ups, checkouts, and expenses.',
+  },
 ]
 
 const nextItems: RoadmapItem[] = [
   {
-    title: 'Announcements',
-    description: 'Workflow-driven notifications for assignments and events.',
+    title: 'Announcements / email-SMS',
+    description: 'Broadcast messages and external channel reminders.',
   },
 ]
 

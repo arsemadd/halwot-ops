@@ -21,6 +21,7 @@ import { UsersPage } from './pages/settings/UsersPage'
 import { RolesPage } from './pages/settings/RolesPage'
 import { ChurchProfilePage } from './pages/settings/ChurchProfilePage'
 import { ActivityLogPage } from './pages/settings/ActivityLogPage'
+import { NotificationsPage } from './pages/settings/NotificationsPage'
 import { RoadmapPage } from './pages/settings/RoadmapPage'
 import { AssetsPage } from './pages/operations/AssetsPage'
 import { AssetDetailPage } from './pages/operations/AssetDetailPage'
@@ -54,6 +55,7 @@ const App = () => (
               <Route path="operations/expenses" element={<ExpensesPage />} />
               <Route path="settings/users" element={<UsersPage />} />
               <Route path="settings/roles" element={<RolesPage />} />
+              <Route path="settings/notifications" element={<NotificationsPage />} />
               <Route path="settings/church-profile" element={<ChurchProfilePage />} />
               <Route path="settings/activity-log" element={<ActivityLogPage />} />
               <Route path="settings/roadmap" element={<RoadmapPage />} />
