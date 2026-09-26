@@ -7,7 +7,7 @@ type TableProps = {
 }
 
 export const Table = ({ children, className }: TableProps) => (
-  <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+  <div className="panel overflow-x-auto">
     <table className={clsx('w-full min-w-full text-left text-sm', className)}>
       {children}
     </table>
@@ -19,7 +19,7 @@ type TableHeaderProps = {
 }
 
 export const TableHeader = ({ children }: TableHeaderProps) => (
-  <thead className="border-b border-border bg-canvas">
+  <thead className="border-b border-border bg-canvas-elevated/80">
     <tr>{children}</tr>
   </thead>
 )
@@ -32,7 +32,7 @@ type TableHeadProps = {
 export const TableHead = ({ children, className }: TableHeadProps) => (
   <th
     scope="col"
-    className={clsx('px-4 py-3 text-xs font-semibold uppercase tracking-wide text-ink-muted', className)}
+    className={clsx('px-4 py-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-ink-subtle', className)}
   >
     {children}
   </th>
@@ -56,7 +56,8 @@ export const TableRow = ({ children, onClick, className }: TableRowProps) => (
   <tr
     className={clsx(
       'transition-colors',
-      onClick && 'cursor-pointer hover:bg-canvas',
+      onClick && 'cursor-pointer hover:bg-accent-light/40',
+      !onClick && 'hover:bg-surface-hover/50',
       className,
     )}
     onClick={onClick}
@@ -79,5 +80,5 @@ type TableCellProps = {
 }
 
 export const TableCell = ({ children, className }: TableCellProps) => (
-  <td className={clsx('px-4 py-3 text-ink', className)}>{children}</td>
+  <td className={clsx('px-4 py-3.5 text-ink', className)}>{children}</td>
 )

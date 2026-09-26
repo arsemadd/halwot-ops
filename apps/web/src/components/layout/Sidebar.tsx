@@ -55,22 +55,33 @@ const navGroups: NavGroup[] = [
 ]
 
 export const Sidebar = () => (
-  <aside className="flex w-56 shrink-0 flex-col border-r border-border bg-surface">
-    <div className="border-b border-border px-5 py-5">
-      <div className="font-[family-name:var(--font-wordmark)] text-xl font-semibold text-accent">
-        Halwot Ops
+  <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-canvas-elevated">
+    <div className="border-b border-border px-4 py-5">
+      <div className="flex items-center gap-3">
+        <img
+          src="/halwot-logo.png"
+          alt="Halwot Emmanuel United Church"
+          className="h-11 w-11 rounded-full ring-2 ring-accent/40"
+        />
+        <div className="min-w-0">
+          <div className="truncate text-base font-bold tracking-tight text-ink">
+            Halwot <span className="text-accent">Ops</span>
+          </div>
+          <div className="truncate text-[11px] font-medium uppercase tracking-[0.14em] text-ink-subtle">
+            HEC OS
+          </div>
+        </div>
       </div>
-      <div className="mt-0.5 text-xs text-ink-subtle">HEC OS</div>
     </div>
     <nav className="flex-1 overflow-y-auto px-3 py-4" aria-label="Main navigation">
       {navGroups.map((group, groupIndex) => (
         <div key={group.title || `group-${groupIndex}`} className={groupIndex > 0 ? 'mt-6' : ''}>
           {group.title && (
-            <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-ink-subtle">
+            <div className="mb-2 px-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-subtle">
               {group.title}
             </div>
           )}
-          <ul className="space-y-0.5">
+          <ul className="space-y-1">
             {group.items.map((item) => (
               <li key={item.to}>
                 <NavLink
@@ -78,10 +89,10 @@ export const Sidebar = () => (
                   end={item.to === '/'}
                   className={({ isActive }) =>
                     clsx(
-                      'block rounded-md px-2 py-2 text-sm font-medium transition-colors',
+                      'block rounded-xl px-3 py-2 text-sm font-medium transition-all',
                       isActive
-                        ? 'bg-accent-light text-accent'
-                        : 'text-ink-muted hover:bg-canvas hover:text-ink',
+                        ? 'bg-accent text-white shadow-[0_8px_20px_rgba(244,121,32,0.35)]'
+                        : 'text-ink-muted hover:bg-accent-light hover:text-ink',
                     )
                   }
                 >
@@ -93,5 +104,10 @@ export const Sidebar = () => (
         </div>
       ))}
     </nav>
+    <div className="border-t border-border px-4 py-4">
+      <p className="text-[11px] leading-relaxed text-ink-subtle">
+        Halwot Emmanuel United Church
+      </p>
+    </div>
   </aside>
 )

@@ -29,7 +29,7 @@ type TabListProps = {
 }
 
 export const TabList = ({ children }: TabListProps) => (
-  <div className="flex gap-1 border-b border-border" role="tablist">
+  <div className="flex flex-wrap gap-1 rounded-2xl border border-border bg-surface/70 p-1.5" role="tablist">
     {children}
   </div>
 )
@@ -64,10 +64,10 @@ export const Tab = ({ value, children }: TabProps) => {
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={clsx(
-        'px-4 py-2.5 text-sm font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
+        'rounded-xl px-4 py-2 text-sm font-semibold transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent',
         isActive
-          ? 'border-b-2 border-accent text-accent'
-          : 'text-ink-muted hover:text-ink',
+          ? 'bg-accent text-white shadow-[0_6px_18px_rgba(244,121,32,0.35)]'
+          : 'text-ink-muted hover:bg-accent-light hover:text-ink',
       )}
     >
       {children}

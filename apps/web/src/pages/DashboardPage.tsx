@@ -34,7 +34,7 @@ export const DashboardPage = () => {
     <div>
       <PageHeader
         title="Dashboard"
-        description="Overview of church operations"
+        description="Live operational pulse across people, ministries, programs, and resources"
       />
       {isLoading && (
         <p className="text-sm text-ink-muted">Loading dashboard…</p>
@@ -44,7 +44,7 @@ export const DashboardPage = () => {
       )}
       {data && (
         <>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {kpiCards
               .filter((card) => {
                 const isOpsKpi = card.key === 'pending_expenses'
@@ -57,20 +57,26 @@ export const DashboardPage = () => {
                 <Link
                   key={card.key}
                   to={card.href}
-                  className="rounded-lg border border-border bg-surface p-4 transition-colors hover:border-accent/30"
+                  className="kpi-card p-5"
                 >
-                  <p className="text-xs font-medium uppercase tracking-wide text-ink-subtle">
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-ink-subtle">
                     {card.label}
                   </p>
-                  <p className="mt-2 text-3xl font-semibold text-ink">
+                  <p className="mt-3 text-4xl font-bold tracking-tight text-ink">
                     {data[card.key] ?? '—'}
                   </p>
+                  <p className="mt-3 text-xs font-medium text-accent">View details →</p>
                 </Link>
               ))}
           </div>
           {data.upcoming_programs && data.upcoming_programs.length > 0 && (
-            <div className="mt-8">
-              <h2 className="mb-4 text-lg font-semibold text-ink">Upcoming programs</h2>
+            <div className="mt-10">
+              <div className="mb-4 flex items-end justify-between">
+                <h2 className="text-xl font-bold text-ink">Upcoming programs</h2>
+                <Link to="/programs" className="text-sm font-medium text-accent hover:text-accent-hover">
+                  All programs
+                </Link>
+              </div>
               <Table>
                 <TableHeader>
                   <TableHead>Title</TableHead>
@@ -82,7 +88,7 @@ export const DashboardPage = () => {
                   {data.upcoming_programs.map((program) => (
                     <TableRow key={program.id}>
                       <TableCell>
-                        <Link to={`/programs/${program.id}`} className="font-medium text-accent hover:underline">
+                        <Link to={`/programs/${program.id}`} className="font-semibold text-accent hover:text-accent-hover">
                           {program.title}
                         </Link>
                       </TableCell>

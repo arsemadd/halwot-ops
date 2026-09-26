@@ -12,11 +12,11 @@ import type {
 type StatusTone = 'neutral' | 'accent' | 'success' | 'warning' | 'danger'
 
 const toneMap: Record<StatusTone, string> = {
-  neutral: 'bg-canvas text-ink-muted',
-  accent: 'bg-accent-light text-accent',
-  success: 'bg-success-light text-success',
-  warning: 'bg-warning-light text-warning',
-  danger: 'bg-danger-light text-danger',
+  neutral: 'border border-border bg-surface text-ink-muted',
+  accent: 'border border-accent/30 bg-accent-light text-accent',
+  success: 'border border-success/30 bg-success-light text-success',
+  warning: 'border border-warning/30 bg-warning-light text-warning',
+  danger: 'border border-danger/30 bg-danger-light text-danger',
 }
 
 type StatusPillProps = {
