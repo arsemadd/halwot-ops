@@ -1,0 +1,14 @@
+{
+  "name": "halwot-ops",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Halwot Church Operations (HEC OS)",
+  "scripts": {
+    "dev:api": "cd apps/api && php artisan serve --host=127.0.0.1 --port=8000",
+    "dev:web": "cd apps/web && npm run dev",
+    "build:web": "cd apps/web && npm run build",
+    "migrate": "cd apps/api && php artisan migrate",
+    "seed": "cd apps/api && php artisan db:seed",
+    "fresh": "cd apps/api && php artisan migrate:fresh --seed"
+  }
+}

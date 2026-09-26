@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+vendor/
+apps/api/vendor/
+apps/web/node_modules/
+apps/web/dist/
+
+# Environment
+.env
+.env.local
+apps/api/.env
+!.env.example
+!apps/api/.env.example
+
+# Laravel
+apps/api/storage/*.key
+apps/api/storage/logs/*
+apps/api/storage/framework/cache/*
+apps/api/storage/framework/sessions/*
+apps/api/storage/framework/views/*
+apps/api/bootstrap/cache/*.php
+!apps/api/bootstrap/cache/.gitignore
+!apps/api/storage/logs/.gitignore
+apps/api/database/*.sqlite
+apps/api/database/*.sqlite-journal
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.log
+
+# Build / misc
+dist/
+coverage/
+.turbo/
+
+apps/api/vendor.bak/
+*.bak/
+
