@@ -35,13 +35,13 @@ export const Modal = ({ isOpen, onClose, title, children, footer, size = 'md' }:
       aria-labelledby="modal-title"
     >
       <div
-        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/40 backdrop-blur-sm"
         onClick={onClose}
         aria-hidden="true"
       />
       <div
         className={clsx(
-          'panel relative z-10 w-full shadow-[0_0_60px_-10px_rgba(244,121,32,0.35)]',
+          'panel relative z-10 w-full shadow-[0_20px_50px_rgba(20,22,26,0.18)]',
           {
             'max-w-sm': size === 'sm',
             'max-w-lg': size === 'md',

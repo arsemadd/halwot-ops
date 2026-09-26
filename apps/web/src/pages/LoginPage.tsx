@@ -84,7 +84,7 @@ export const LoginPage = () => {
           </div>
         </div>
 
-        <div className="panel mx-auto w-full max-w-md p-8 shadow-[0_0_80px_-20px_rgba(244,121,32,0.45)]">
+        <div className="panel mx-auto w-full max-w-md p-8 shadow-[0_20px_50px_rgba(244,121,32,0.12)]">
           <div className="mb-8 flex flex-col items-center text-center lg:items-start lg:text-left">
             <img
               src="/halwot-logo.png"

@@ -55,13 +55,13 @@ const navGroups: NavGroup[] = [
 ]
 
 export const Sidebar = () => (
-  <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-canvas-elevated">
+  <aside className="flex w-60 shrink-0 flex-col border-r border-border bg-white">
     <div className="border-b border-border px-4 py-5">
       <div className="flex items-center gap-3">
         <img
           src="/halwot-logo.png"
           alt="Halwot Emmanuel United Church"
-          className="h-11 w-11 rounded-full ring-2 ring-accent/40"
+          className="h-11 w-11 rounded-full ring-2 ring-accent/30"
         />
         <div className="min-w-0">
           <div className="truncate text-base font-bold tracking-tight text-ink">
@@ -91,7 +91,7 @@ export const Sidebar = () => (
                     clsx(
                       'block rounded-xl px-3 py-2 text-sm font-medium transition-all',
                       isActive
-                        ? 'bg-accent text-white shadow-[0_8px_20px_rgba(244,121,32,0.35)]'
+                        ? 'bg-accent text-white shadow-[0_8px_20px_rgba(244,121,32,0.28)]'
                         : 'text-ink-muted hover:bg-accent-light hover:text-ink',
                     )
                   }

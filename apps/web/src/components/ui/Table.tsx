@@ -19,7 +19,7 @@ type TableHeaderProps = {
 }
 
 export const TableHeader = ({ children }: TableHeaderProps) => (
-  <thead className="border-b border-border bg-canvas-elevated/80">
+  <thead className="border-b border-border bg-canvas-elevated">
     <tr>{children}</tr>
   </thead>
 )

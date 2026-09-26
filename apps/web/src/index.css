@@ -2,28 +2,28 @@
 @import 'tailwindcss';
 
 :root {
-  --color-canvas: #0b0d12;
-  --color-canvas-elevated: #12151c;
-  --color-ink: #f4f5f7;
-  --color-ink-muted: #a8aeb9;
-  --color-ink-subtle: #6b7280;
+  --color-canvas: #ffffff;
+  --color-canvas-elevated: #f7f8fa;
+  --color-ink: #14161a;
+  --color-ink-muted: #5c6370;
+  --color-ink-subtle: #8b919c;
   --color-accent: #f47920;
-  --color-accent-hover: #ff8a38;
-  --color-accent-light: rgba(244, 121, 32, 0.16);
-  --color-accent-glow: rgba(244, 121, 32, 0.35);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-strong: rgba(255, 255, 255, 0.14);
-  --color-surface: #161922;
-  --color-surface-hover: #1c2030;
-  --color-danger: #ff6b6b;
-  --color-danger-light: rgba(255, 107, 107, 0.14);
-  --color-warning: #f5a524;
-  --color-warning-light: rgba(245, 165, 36, 0.14);
-  --color-success: #3dcf8e;
-  --color-success-light: rgba(61, 207, 142, 0.14);
+  --color-accent-hover: #e06a14;
+  --color-accent-light: rgba(244, 121, 32, 0.12);
+  --color-accent-glow: rgba(244, 121, 32, 0.22);
+  --color-border: #e6e8ee;
+  --color-border-strong: #d5d9e2;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f3f4f7;
+  --color-danger: #d92d20;
+  --color-danger-light: #fef3f2;
+  --color-warning: #b54708;
+  --color-warning-light: #fffaeb;
+  --color-success: #079455;
+  --color-success-light: #ecfdf3;
   --font-ui: 'Outfit', system-ui, sans-serif;
   --font-wordmark: 'Outfit', system-ui, sans-serif;
-  --shadow-glow: 0 0 60px -12px var(--color-accent-glow);
+  --shadow-glow: 0 10px 30px -12px var(--color-accent-glow);
   --radius-control: 999px;
   --radius-panel: 1rem;
 }
@@ -73,23 +73,23 @@ body {
 
 .brand-glow-bg {
   background:
-    radial-gradient(ellipse 80% 60% at 70% 10%, rgba(244, 121, 32, 0.28), transparent 55%),
-    radial-gradient(ellipse 50% 40% at 15% 80%, rgba(244, 121, 32, 0.12), transparent 50%),
-    var(--color-canvas);
+    radial-gradient(ellipse 70% 50% at 85% 0%, rgba(244, 121, 32, 0.16), transparent 55%),
+    radial-gradient(ellipse 45% 35% at 0% 100%, rgba(244, 121, 32, 0.08), transparent 50%),
+    #ffffff;
 }
 
 .panel {
   border: 1px solid var(--color-border);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 40%), var(--color-surface);
+  background: #ffffff;
   border-radius: var(--radius-panel);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(20, 22, 26, 0.06);
 }
 
 .kpi-card {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--color-border);
-  background: linear-gradient(145deg, rgba(244, 121, 32, 0.08), transparent 45%), var(--color-surface);
+  background: linear-gradient(145deg, rgba(244, 121, 32, 0.06), transparent 42%), #ffffff;
   border-radius: var(--radius-panel);
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -106,6 +106,6 @@ body {
   inset: auto -20% -40% auto;
   width: 120px;
   height: 120px;
-  background: radial-gradient(circle, rgba(244, 121, 32, 0.25), transparent 70%);
+  background: radial-gradient(circle, rgba(244, 121, 32, 0.18), transparent 70%);
   pointer-events: none;
 }
