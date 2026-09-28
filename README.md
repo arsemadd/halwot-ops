@@ -41,10 +41,13 @@ php artisan migrate --seed
 php artisan serve
 ```
 
-Default admin after seed:
+Default accounts after seed:
 
-- Email: `admin@halwot.local`
-- Password: `password`
+| Role | Email | Password |
+|------|-------|----------|
+| Super Admin | `admin@halwot.local` | `password` |
+| Finance | `finance@halwot.local` | `password` |
+| Member portal | `member@halwot.local` | `password` |
 
 ### Web
 
@@ -77,6 +80,13 @@ Open http://localhost:5173
 - Checkout lifecycle (request → approve → checkout → return)
 - Expense workflow (draft → submitted → approved → paid → reconciled)
 - Program budgets, tasks, and documents
+
+### Phase 3 — Communications, finance, portal, reports
+
+- Announcements (in-app broadcasts)
+- Giving / tithes (finance-role only)
+- Member portal (profile, schedules, RSVPs, serving confirmations)
+- Reports & church intelligence
 
 ## Deploy
 

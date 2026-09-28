@@ -47,31 +47,39 @@ const nowItems: RoadmapItem[] = [
     title: 'In-app notifications',
     description: 'Operational alerts for follow-ups, checkouts, and expenses.',
   },
+  {
+    title: 'Announcements',
+    description: 'In-app broadcasts for everyone, staff, or members — with publish workflow.',
+  },
+  {
+    title: 'Giving & tithes',
+    description: 'Finance-role only giving ledger, kept off general member profiles.',
+  },
+  {
+    title: 'Member portal',
+    description: 'Self-service profile, serving confirmations, and program RSVPs.',
+  },
+  {
+    title: 'Reports & intelligence',
+    description: 'Membership growth, attendance, follow-up health, ministry depth, and giving trends.',
+  },
 ]
 
 const nextItems: RoadmapItem[] = [
   {
-    title: 'Announcements / email-SMS',
-    description: 'Broadcast messages and external channel reminders.',
+    title: 'Email / SMS communications',
+    description: 'Reminders and announcements through external channels.',
   },
 ]
 
 const laterItems: RoadmapItem[] = [
   {
-    title: 'Giving & tithes',
-    description: 'Restricted finance-role giving records, separate from general member profiles.',
+    title: 'AI assistant',
+    description: 'Natural-language ops helpers on structured church data.',
   },
   {
-    title: 'Member portal',
-    description: 'Self-service profile, schedules, RSVPs, and serving confirmations.',
-  },
-  {
-    title: 'Email / SMS communications',
-    description: 'Reminders and announcements through external channels.',
-  },
-  {
-    title: 'Reports & AI assistant',
-    description: 'Church intelligence and natural-language ops helpers on structured data.',
+    title: 'Multi-campus',
+    description: 'Support multiple campuses or churches in one Halwot Ops deployment.',
   },
 ]
 

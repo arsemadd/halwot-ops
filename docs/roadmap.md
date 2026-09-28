@@ -1,6 +1,6 @@
 # Product roadmap
 
-## NOW (Phase 1 + Phase 2)
+## NOW (Phase 1 + Phase 2 + Phase 3 core)
 
 - [x] Member registry
 - [x] Households
@@ -16,14 +16,14 @@
 - [x] Asset checkout lifecycle
 - [x] Expense requests & approval
 - [x] Program budgets, tasks, documents
+- [x] Announcements (in-app broadcasts)
+- [x] Giving / tithes (finance-role only)
+- [x] Member portal (profile, schedules, RSVPs)
+- [x] Reports & church intelligence
 
-## NEXT (Phase 3)
+## NEXT
 
-- [ ] Announcements
-- [ ] Giving / tithes (restricted finance role)
-- [ ] Member portal
 - [ ] Email / SMS notifications
-- [ ] Reports & church intelligence
 
 ## LATER (Phase 4+)
 

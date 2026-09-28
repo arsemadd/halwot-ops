@@ -1,6 +1,8 @@
 export type User = {
   id: number
   organization_id?: number
+  person_id?: number | null
+  person?: Person | null
   name: string
   email: string
   roles?: string[]
@@ -395,6 +397,100 @@ export type Organization = {
 export type DuplicateCheckResult = {
   duplicates: Person[]
   has_duplicates: boolean
+}
+
+export type AnnouncementAudience = 'all' | 'staff' | 'members'
+export type AnnouncementStatus = 'draft' | 'published' | 'archived'
+
+export type Announcement = {
+  id: number
+  title: string
+  body: string
+  audience: AnnouncementAudience
+  status: AnnouncementStatus
+  published_at?: string | null
+  expires_at?: string | null
+  created_by_user_id?: number
+  created_by?: User | null
+  created_at?: string
+  updated_at?: string
+}
+
+export type GivingType = 'tithe' | 'offering' | 'special' | 'other'
+export type GivingMethod = 'cash' | 'bank' | 'mobile' | 'card' | 'other'
+
+export type GivingRecord = {
+  id: number
+  person_id?: number | null
+  person?: Person | null
+  recorded_by_user_id?: number
+  recorded_by?: User | null
+  type: GivingType
+  amount: string
+  currency: string
+  given_on: string
+  method: GivingMethod
+  fund?: string | null
+  is_anonymous: boolean
+  notes?: string | null
+  created_at?: string
+  updated_at?: string
+}
+
+export type GivingSummary = {
+  from: string
+  to: string
+  total: string
+  currency: string
+  record_count: number
+  by_type: Array<{ type: string; total: string; count: number }>
+  by_method: Array<{ method: string; total: string; count: number }>
+  monthly: Array<{ month: string; label: string; total: string }>
+}
+
+export type PortalProgram = Program & {
+  rsvp_status?: string | null
+  rsvp_id?: number | null
+}
+
+export type PortalOverview = {
+  person: Person
+  serving: MinistryMembership[]
+  assignments: Array<ProgramAssignment & { program?: Program | null }>
+  upcoming_programs: PortalProgram[]
+  announcements: Announcement[]
+}
+
+export type ChurchReports = {
+  generated_at: string
+  people: {
+    total: number
+    members: number
+    volunteers: number
+    by_status: Record<string, number>
+    growth: Array<{ month: string; label: string; count: number }>
+  }
+  attendance: {
+    by_month: Array<{ month: string; label: string; count: number }>
+  }
+  follow_ups: {
+    open: number
+    in_progress: number
+    completed: number
+    overdue: number
+  }
+  ministries: Array<{ id: number; name: string; active_count: number }>
+  programs: {
+    upcoming: number
+    this_month: number
+    rsvp_attending: number
+  }
+  giving: null | {
+    month_total: string
+    currency: string
+    by_type: Array<{ type: string; total: string }>
+    monthly: Array<{ month: string; label: string; total: string }>
+  }
 }
 
 export const getPersonDisplayName = (person: Pick<Person, 'full_name' | 'preferred_name'>) =>

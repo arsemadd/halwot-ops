@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Navigate } from 'react-router-dom'
 import { z } from 'zod'
 import { getErrorMessage, useAuth } from '../lib/auth'
+import { hasPermission, isMemberOnly } from '../lib/permissions'
 import { Button } from '../components/ui/Button'
 import { Input } from '../components/ui/Input'
 
@@ -15,7 +16,7 @@ const loginSchema = z.object({
 type LoginForm = z.infer<typeof loginSchema>
 
 export const LoginPage = () => {
-  const { login, isAuthenticated, isLoading } = useAuth()
+  const { login, isAuthenticated, isLoading, user } = useAuth()
   const [error, setError] = useState<string | null>(null)
 
   const {
@@ -35,7 +36,12 @@ export const LoginPage = () => {
   }
 
   if (isAuthenticated) {
-    return <Navigate to="/" replace />
+    const to =
+      isMemberOnly(user?.roles, user?.permissions) &&
+      !hasPermission(user?.permissions, 'people.view')
+        ? '/portal'
+        : '/'
+    return <Navigate to={to} replace />
   }
 
   const handleLogin = async (data: LoginForm) => {

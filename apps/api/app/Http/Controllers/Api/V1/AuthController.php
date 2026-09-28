@@ -44,9 +44,13 @@ class AuthController extends BaseApiController
 
     private function formatUser($user): array
     {
+        $user->loadMissing('person:id,full_name,preferred_name,email,phone,membership_status');
+
         return [
             'id' => $user->id,
             'organization_id' => $user->organization_id,
+            'person_id' => $user->person_id,
+            'person' => $user->person,
             'name' => $user->name,
             'email' => $user->email,
             'roles' => $user->getRoleNames()->values()->all(),

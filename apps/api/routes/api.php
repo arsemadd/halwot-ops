@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\ActivityLogController;
+use App\Http\Controllers\Api\V1\AnnouncementController;
 use App\Http\Controllers\Api\V1\AssetCheckoutController;
 use App\Http\Controllers\Api\V1\AssetController;
 use App\Http\Controllers\Api\V1\AssetLocationController;
@@ -8,15 +9,18 @@ use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\DashboardController;
 use App\Http\Controllers\Api\V1\ExpenseController;
 use App\Http\Controllers\Api\V1\FollowUpController;
+use App\Http\Controllers\Api\V1\GivingController;
 use App\Http\Controllers\Api\V1\HouseholdController;
 use App\Http\Controllers\Api\V1\MinistryController;
 use App\Http\Controllers\Api\V1\NotificationController;
 use App\Http\Controllers\Api\V1\OrganizationController;
 use App\Http\Controllers\Api\V1\PersonController;
+use App\Http\Controllers\Api\V1\PortalController;
 use App\Http\Controllers\Api\V1\ProgramBudgetController;
 use App\Http\Controllers\Api\V1\ProgramController;
 use App\Http\Controllers\Api\V1\ProgramDocumentController;
 use App\Http\Controllers\Api\V1\ProgramTaskController;
+use App\Http\Controllers\Api\V1\ReportController;
 use App\Http\Controllers\Api\V1\RoleController;
 use App\Http\Controllers\Api\V1\ServingController;
 use App\Http\Controllers\Api\V1\UserController;
@@ -68,6 +72,25 @@ Route::middleware('auth:sanctum')->prefix('v1')->group(function () {
     Route::patch('/expenses/{expense}/reject', [ExpenseController::class, 'reject']);
     Route::patch('/expenses/{expense}/mark-paid', [ExpenseController::class, 'markPaid']);
     Route::patch('/expenses/{expense}/reconcile', [ExpenseController::class, 'reconcile']);
+
+    Route::get('/announcements', [AnnouncementController::class, 'index']);
+    Route::post('/announcements', [AnnouncementController::class, 'store']);
+    Route::get('/announcements/{announcement}', [AnnouncementController::class, 'show']);
+    Route::patch('/announcements/{announcement}', [AnnouncementController::class, 'update']);
+    Route::patch('/announcements/{announcement}/publish', [AnnouncementController::class, 'publish']);
+
+    Route::get('/giving/summary', [GivingController::class, 'summary']);
+    Route::get('/giving', [GivingController::class, 'index']);
+    Route::post('/giving', [GivingController::class, 'store']);
+    Route::get('/giving/{givingRecord}', [GivingController::class, 'show']);
+    Route::patch('/giving/{givingRecord}', [GivingController::class, 'update']);
+
+    Route::get('/portal', [PortalController::class, 'overview']);
+    Route::patch('/portal/profile', [PortalController::class, 'updateProfile']);
+    Route::post('/portal/rsvps', [PortalController::class, 'upsertRsvp']);
+    Route::patch('/portal/assignments/{programAssignment}', [PortalController::class, 'updateAssignment']);
+
+    Route::get('/reports', [ReportController::class, 'index']);
 
     Route::get('/notifications', [NotificationController::class, 'index']);
     Route::patch('/notifications/mark-all-read', [NotificationController::class, 'markAllRead']);

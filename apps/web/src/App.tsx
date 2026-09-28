@@ -1,7 +1,8 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { AuthProvider } from './lib/auth'
+import { AuthProvider, useAuth } from './lib/auth'
 import { QueryProvider } from './lib/query'
 import { ToastProvider } from './components/ui/Toast'
+import { RequirePermission } from './components/auth/RequirePermission'
 import { AppShell } from './components/layout/AppShell'
 import { LoginPage } from './pages/LoginPage'
 import { DashboardPage } from './pages/DashboardPage'
@@ -27,6 +28,28 @@ import { AssetsPage } from './pages/operations/AssetsPage'
 import { AssetDetailPage } from './pages/operations/AssetDetailPage'
 import { CheckoutsPage } from './pages/operations/CheckoutsPage'
 import { ExpensesPage } from './pages/operations/ExpensesPage'
+import { AnnouncementsPage } from './pages/communications/AnnouncementsPage'
+import { GivingPage } from './pages/finance/GivingPage'
+import { PortalPage } from './pages/portal/PortalPage'
+import { ReportsPage } from './pages/reports/ReportsPage'
+import { hasPermission, isMemberOnly } from './lib/permissions'
+
+const HomeRedirect = () => {
+  const { user } = useAuth()
+  if (isMemberOnly(user?.roles, user?.permissions) && !hasPermission(user?.permissions, 'people.view')) {
+    return <Navigate to="/portal" replace />
+  }
+  if (hasPermission(user?.permissions, 'people.view')) {
+    return <DashboardPage />
+  }
+  if (hasPermission(user?.permissions, 'portal.access')) {
+    return <Navigate to="/portal" replace />
+  }
+  if (hasPermission(user?.permissions, 'reports.view')) {
+    return <Navigate to="/reports" replace />
+  }
+  return <Navigate to="/communications/announcements" replace />
+}
 
 const App = () => (
   <QueryProvider>
@@ -36,7 +59,23 @@ const App = () => (
           <Routes>
             <Route path="/login" element={<LoginPage />} />
             <Route element={<AppShell />}>
-              <Route index element={<DashboardPage />} />
+              <Route index element={<HomeRedirect />} />
+              <Route
+                path="portal"
+                element={
+                  <RequirePermission permission="portal.access" fallback="/">
+                    <PortalPage />
+                  </RequirePermission>
+                }
+              />
+              <Route
+                path="reports"
+                element={
+                  <RequirePermission permission="reports.view">
+                    <ReportsPage />
+                  </RequirePermission>
+                }
+              />
               <Route path="people/members" element={<MembersPage />} />
               <Route path="people/members/register" element={<RegisterMemberPage />} />
               <Route path="people/members/:id" element={<MemberDetailPage />} />
@@ -53,6 +92,22 @@ const App = () => (
               <Route path="operations/assets/:id" element={<AssetDetailPage />} />
               <Route path="operations/checkouts" element={<CheckoutsPage />} />
               <Route path="operations/expenses" element={<ExpensesPage />} />
+              <Route
+                path="communications/announcements"
+                element={
+                  <RequirePermission permission="announcements.view">
+                    <AnnouncementsPage />
+                  </RequirePermission>
+                }
+              />
+              <Route
+                path="finance/giving"
+                element={
+                  <RequirePermission permission="giving.view" fallback="/">
+                    <GivingPage />
+                  </RequirePermission>
+                }
+              />
               <Route path="settings/users" element={<UsersPage />} />
               <Route path="settings/roles" element={<RolesPage />} />
               <Route path="settings/notifications" element={<NotificationsPage />} />

@@ -140,3 +140,34 @@ export const IconChurch = (props: IconProps) => (
     <path d="M10 21v-5h4v5" />
   </svg>
 )
+
+export const IconAnnounce = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...base} {...props}>
+    <path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z" />
+    <path d="M16 8.5a4.5 4.5 0 0 1 0 7" />
+    <path d="M18.5 6a8 8 0 0 1 0 12" />
+  </svg>
+)
+
+export const IconGiving = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...base} {...props}>
+    <path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 11c0 5.5-7 10-7 10z" />
+  </svg>
+)
+
+export const IconReports = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...base} {...props}>
+    <path d="M4 19V5" />
+    <path d="M4 19h16" />
+    <path d="M8 16V10" />
+    <path d="M12 16V7" />
+    <path d="M16 16v-4" />
+  </svg>
+)
+
+export const IconPortal = (props: IconProps) => (
+  <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" {...base} {...props}>
+    <circle cx="12" cy="8" r="3.5" />
+    <path d="M5 20a7 7 0 0 1 14 0" />
+  </svg>
+)

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ActivityLog;
+use App\Models\Announcement;
 use App\Models\AppNotification;
 use App\Models\Asset;
 use App\Models\AssetCheckout;
@@ -10,6 +11,7 @@ use App\Models\AssetLocation;
 use App\Models\AttendanceRecord;
 use App\Models\Expense;
 use App\Models\FollowUp;
+use App\Models\GivingRecord;
 use App\Models\Household;
 use App\Models\Ministry;
 use App\Models\MinistryMembership;
@@ -19,6 +21,7 @@ use App\Models\Program;
 use App\Models\ProgramAssignment;
 use App\Models\ProgramBudget;
 use App\Models\ProgramDocument;
+use App\Models\ProgramRsvp;
 use App\Models\ProgramTask;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -62,6 +65,14 @@ class DatabaseSeeder extends Seeder
             'expenses.approve',
             'expenses.pay',
             'programs.manage_ops',
+            'announcements.view',
+            'announcements.create',
+            'announcements.edit',
+            'giving.view',
+            'giving.create',
+            'giving.edit',
+            'reports.view',
+            'portal.access',
         ];
 
         foreach ($permissions as $permission) {
@@ -85,13 +96,17 @@ class DatabaseSeeder extends Seeder
             'programs.edit',
             'attendance.view',
             'attendance.edit',
+            'announcements.view',
+            'reports.view',
+            'portal.access',
         ]);
 
         $member = Role::firstOrCreate(['name' => 'Member', 'guard_name' => 'web']);
         $member->syncPermissions([
-            'people.view',
-            'ministries.view',
+            'announcements.view',
+            'portal.access',
             'programs.view',
+            'ministries.view',
         ]);
 
         $assetManager = Role::firstOrCreate(['name' => 'Media/Asset Manager', 'guard_name' => 'web']);
@@ -102,6 +117,7 @@ class DatabaseSeeder extends Seeder
             'assets.checkout',
             'programs.view',
             'programs.manage_ops',
+            'announcements.view',
         ]);
 
         $finance = Role::firstOrCreate(['name' => 'Finance', 'guard_name' => 'web']);
@@ -110,7 +126,13 @@ class DatabaseSeeder extends Seeder
             'expenses.create',
             'expenses.approve',
             'expenses.pay',
+            'giving.view',
+            'giving.create',
+            'giving.edit',
             'programs.view',
+            'reports.view',
+            'announcements.view',
+            'people.view',
         ]);
 
         $organization = Organization::create([
@@ -489,5 +511,90 @@ class DatabaseSeeder extends Seeder
             'description' => 'Expense request submitted',
             'created_at' => now()->subDay()->setTime(11, 5),
         ]);
+
+        Announcement::create([
+            'organization_id' => $organization->id,
+            'created_by_user_id' => $admin->id,
+            'title' => 'Welcome Sunday — bring a friend',
+            'body' => 'This Sunday we are hosting a special welcome gathering after service. Invite someone new and meet us in the fellowship hall.',
+            'audience' => 'all',
+            'status' => 'published',
+            'published_at' => now()->subHours(6),
+        ]);
+
+        Announcement::create([
+            'organization_id' => $organization->id,
+            'created_by_user_id' => $admin->id,
+            'title' => 'Volunteer briefing — ushers',
+            'body' => 'Ushers please arrive 30 minutes early this week for a short briefing with the welcome team.',
+            'audience' => 'staff',
+            'status' => 'draft',
+        ]);
+
+        GivingRecord::create([
+            'organization_id' => $organization->id,
+            'person_id' => $people[0]->id,
+            'recorded_by_user_id' => $admin->id,
+            'type' => 'tithe',
+            'amount' => 1500.00,
+            'currency' => 'ETB',
+            'given_on' => now()->subDays(2)->toDateString(),
+            'method' => 'mobile',
+            'fund' => 'General',
+            'is_anonymous' => false,
+        ]);
+
+        GivingRecord::create([
+            'organization_id' => $organization->id,
+            'person_id' => null,
+            'recorded_by_user_id' => $admin->id,
+            'type' => 'offering',
+            'amount' => 850.00,
+            'currency' => 'ETB',
+            'given_on' => now()->subDays(1)->toDateString(),
+            'method' => 'cash',
+            'fund' => 'Sunday offering',
+            'is_anonymous' => true,
+            'notes' => 'Anonymous cash offering',
+        ]);
+
+        GivingRecord::create([
+            'organization_id' => $organization->id,
+            'person_id' => $people[2]->id,
+            'recorded_by_user_id' => $admin->id,
+            'type' => 'special',
+            'amount' => 3000.00,
+            'currency' => 'ETB',
+            'given_on' => now()->subMonth()->toDateString(),
+            'method' => 'bank',
+            'fund' => 'Building',
+            'is_anonymous' => false,
+        ]);
+
+        ProgramRsvp::create([
+            'organization_id' => $organization->id,
+            'program_id' => $program->id,
+            'person_id' => $people[1]->id,
+            'status' => 'attending',
+        ]);
+
+        $memberUser = User::create([
+            'organization_id' => $organization->id,
+            'person_id' => $people[1]->id,
+            'name' => 'Sara Tesfaye',
+            'email' => 'member@halwot.local',
+            'password' => Hash::make('password'),
+        ]);
+        $memberUser->assignRole('Member');
+
+        $financeUser = User::create([
+            'organization_id' => $organization->id,
+            'name' => 'Finance Officer',
+            'email' => 'finance@halwot.local',
+            'password' => Hash::make('password'),
+        ]);
+        $financeUser->assignRole('Finance');
+
+        $admin->update(['person_id' => $people[0]->id]);
     }
 }
